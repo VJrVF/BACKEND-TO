@@ -8,9 +8,14 @@ const port = process.env.PORT || 3000;
 require('dotenv').config();
 
 // BASE DE DATOS
-mongoose.connect( process.env.MONGO_DB )
-                               .then( () => console.log('Conectado a la Base de Datos'))
-                               .catch( (err) => console.log(err));
+mongoose.connect( process.env.MONGO_DB,
+    {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+        useCreateIndex: true,
+        useFindAndModify: false,
+    }, 
+).then( () => console.log('Conectado a la Base de Datos')).catch( (err) => console.log(err));
 
 // Import Routes
 const itemsRoutes = require('./routes/item');
