@@ -2,6 +2,7 @@ const express = require('express');
 const app = express();
 const cors = require('cors');
 const mongoose = require('mongoose');
+const Item = require('../models/items');
 
 const port = process.env.PORT || 3000;
 
@@ -33,8 +34,14 @@ app.use('/create-payment-intent', paymentsIntentRoutes);
 app.use('/order', orderRoutes);
 
 // Rutas
-app.get('/', (req, res) => {
-    res.send('HOME');
+app.get('/', async(req, res) => {
+    //res.send('HOME');
+    try {
+        const itemsimg = await Item();
+        res.json(itemsimg);
+    } catch(err) {
+        res.json({ msg: err.message })
+    }
 });
 
 // IMAGES
