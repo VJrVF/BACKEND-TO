@@ -3,6 +3,8 @@ const app = express();
 const cors = require('cors');
 const mongoose = require('mongoose');
 
+const port = process.env.PORT || 3000;
+
 require('dotenv').config();
 
 // BASE DE DATOS
@@ -35,4 +37,4 @@ app.get('/', (req, res) => {
 
 
 // Iniciar
-app.listen( process.env.PORT );
+app.listen( port, () => console.log( 'Server started on port', port));
